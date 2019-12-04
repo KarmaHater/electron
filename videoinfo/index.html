@@ -17,10 +17,20 @@
       </div>
       <button type="submit">Get Info</button>
     </form>
+    <h1 id="result"></h1>
     <script>
+      const electron = require("electron"); // running in node runtime
+      const { ipcRenderer } = electron;
+
       document.querySelector("form").addEventListener("submit", e => {
         e.preventDefault();
-        const file = document.querySelector("input").files[0];
+        const { path } = document.querySelector("input").files[0];
+        // ipcRenderer.send is what sends events to the Icp/electron app
+        ipcRenderer.send("video:submit", path);
+        // ipcRenderer.on is what listens to events from Icp/electron app
+        ipcRenderer.on("video:length", (event, length) => {
+          document.querySelector("#result").innerHTML = `${length} length`;
+        });
       });
     </script>
   </body>
