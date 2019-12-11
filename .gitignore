@@ -1,2 +1,4 @@
  !/videoinfo/node_modules
-videoinfo/node_modules
+ !/todo/node_modules
+videoinfo/node_modules/
+/todo/node_modules
